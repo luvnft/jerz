@@ -1,12 +1,12 @@
 import React from "react";
-const App = () => {
+import Reels from "./components/Reels";
+
+function App() {
   return (
-    <>
-      <div className="bg-gray-50 min-h-[90vh]">
-        <div className="min-h-80 flex justify-center">hello</div>
-      </div>
-    </>
+    <div className="App">
+      <Reels />
+    </div>
   );
-};
+}
 
 export default App;
