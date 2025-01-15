@@ -53,7 +53,7 @@ const Reel = ({
           <FaShareAlt />
         </button>
       </div>
-      <div className="product-tag">#AmazingReel {id}</div>
+      <div className="product-tag">#AmazingReel id: {id}</div>
     </div>
   );
 };
@@ -112,7 +112,20 @@ const Reels = () => {
   };
 
   const handleShare = (id) => {
-    console.log(`Shared video with ID: ${id}`);
+    const shareUrl = `https://insta-reels-one.vercel.app/video/`;
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Check out this reel!",
+          text: "Check out this amazing video reel on Insta Reels!",
+          url: shareUrl,
+        })
+        .catch((err) => console.error("Share failed", err));
+    } else {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        alert("Link copied to clipboard!");
+      });
+    }
   };
 
   return (
