@@ -1,7 +1,5 @@
 # Instagram-reel
-Instagram reels app
-=======
-
+demo app link: https://insta-reels-one.vercel.app/
 
 
 # Getting Started with Create React App
