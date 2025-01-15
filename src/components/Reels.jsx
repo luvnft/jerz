@@ -2,8 +2,19 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import throttle from "lodash/throttle";
 import "./Reels.css";
 import videolinks from "./videolinks";
+import { FaThumbsUp, FaShareAlt } from "react-icons/fa";
 
-const Reel = ({ src, isPlaying, onVideoLoad, isMuted, toggleMute }) => {
+const Reel = ({
+  src,
+  isPlaying,
+  onVideoLoad,
+  isMuted,
+  toggleMute,
+  onLike,
+  onShare,
+  isLiked,
+  id,
+}) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -32,7 +43,17 @@ const Reel = ({ src, isPlaying, onVideoLoad, isMuted, toggleMute }) => {
       />
       <div className="reel-controls">
         <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
+        <button
+          className={`like-button ${isLiked ? "liked" : ""}`}
+          onClick={onLike}
+        >
+          <FaThumbsUp />
+        </button>
+        <button className="share-button" onClick={onShare}>
+          <FaShareAlt />
+        </button>
       </div>
+      <div className="product-tag">#AmazingReel {id}</div>
     </div>
   );
 };
@@ -43,6 +64,7 @@ const Reels = () => {
   const [loadedVideos, setLoadedVideos] = useState(3);
   const [loading, setLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [likedVideos, setLikedVideos] = useState({});
 
   useEffect(() => {
     setReelsData(videolinks);
@@ -82,6 +104,17 @@ const Reels = () => {
 
   const toggleMute = () => setIsMuted((prev) => !prev);
 
+  const handleLike = (id) => {
+    setLikedVideos((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const handleShare = (id) => {
+    console.log(`Shared video with ID: ${id}`);
+  };
+
   return (
     <div className="reels-container">
       {reelsData.slice(0, loadedVideos).map((reel, index) => (
@@ -92,6 +125,10 @@ const Reels = () => {
             onVideoLoad={() => {}}
             isMuted={isMuted}
             toggleMute={toggleMute}
+            onLike={() => handleLike(reel.id)}
+            onShare={() => handleShare(reel.id)}
+            isLiked={likedVideos[reel.id]}
+            id={reel.id}
           />
         </div>
       ))}
