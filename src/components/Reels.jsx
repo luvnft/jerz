@@ -54,7 +54,7 @@ const Reels = () => {
       setTimeout(() => {
         setLoadedVideos((prev) => Math.min(prev + 2, reelsData.length));
         setLoading(false);
-      }, 2000);
+      }, 1000);
     }
   }, [loadedVideos, reelsData.length]);
 
