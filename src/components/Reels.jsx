@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import throttle from "lodash/throttle";
-import "./Reels.css";
 import videolinks from "./videolinks";
-import { FaThumbsUp, FaShareAlt } from "react-icons/fa";
+import { FaShareAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaThumbsUp, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
 const Reel = ({
   src,
   isPlaying,
-  onVideoLoad,
   isMuted,
   toggleMute,
   onLike,
@@ -16,44 +16,106 @@ const Reel = ({
   id,
 }) => {
   const videoRef = useRef(null);
+  const [animateThumb, setAnimateThumb] = useState(false);
+  const [animateSpeaker, setAnimateSpeaker] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
+    const video = videoRef.current;
+
+    if (video) {
       if (isPlaying) {
-        videoRef.current
+        video
           .play()
-          .catch((err) => console.error("Playback error:", err));
+          .catch((err) => console.error("Playback error:", err.message || err));
       } else {
-        videoRef.current.pause();
+        const pauseTimeout = setTimeout(() => {
+          video.pause();
+        }, 100);
+
+        return () => clearTimeout(pauseTimeout);
       }
     }
   }, [isPlaying]);
 
+  const handleLikeClick = () => {
+    onLike();
+    setAnimateThumb(true);
+    setTimeout(() => setAnimateThumb(false), 2000);
+  };
+
+  const handleMuteClick = () => {
+    toggleMute();
+    setAnimateSpeaker(true);
+    setTimeout(() => setAnimateSpeaker(false), 2000);
+  };
+
   return (
-    <div className="reel">
+    <div className="relative w-full h-screen flex justify-center items-center bg-black border-4 border-white shadow-lg p-4 box-border">
       <video
         ref={videoRef}
         src={src}
-        className="reel-video"
+        className="w-full h-full object-contain cursor-pointer rounded-lg transition-opacity duration-300 ease-in-out"
         loop
         muted={isMuted}
         playsInline
-        onLoadedData={onVideoLoad}
         onClick={toggleMute}
       />
-      <div className="reel-controls">
-        <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
-        <button
-          className={`like-button ${isLiked ? "liked" : ""}`}
-          onClick={onLike}
+
+      {animateThumb && (
+        <motion.div
+          className="absolute z-20"
+          animate={{ scale: 2, opacity: 1 }}
+          initial={{ scale: 1, opacity: 0 }}
+          transition={{ duration: 2 }}
+        >
+          <FaThumbsUp className="text-white text-6xl" />
+        </motion.div>
+      )}
+
+      {animateSpeaker && (
+        <motion.div
+          className="absolute z-20"
+          animate={{ scale: 2, opacity: 1 }}
+          initial={{ scale: 1, opacity: 0 }}
+          transition={{ duration: 2 }}
+        >
+          {isMuted ? (
+            <FaVolumeMute className="text-white text-6xl" />
+          ) : (
+            <FaVolumeUp className="text-white text-6xl" />
+          )}
+        </motion.div>
+      )}
+
+      <div className="absolute bottom-5 left-5 z-10 flex justify-center items-center gap-2">
+        <motion.button
+          onClick={handleMuteClick}
+          className="bg-black/50 text-white text-base px-4 py-2 rounded-md transition-colors duration-300 hover:bg-black/70"
+        >
+          {isMuted ? "Unmute" : "Mute"}
+        </motion.button>
+
+        <motion.button
+          onClick={handleLikeClick}
+          className={`text-base px-4 py-2 rounded-md transition-colors duration-300 ${
+            isLiked
+              ? "bg-blue-500 text-white"
+              : "bg-black/50 text-white hover:bg-black/70"
+          }`}
         >
           <FaThumbsUp />
-        </button>
-        <button className="share-button" onClick={onShare}>
+        </motion.button>
+
+        <motion.button
+          onClick={onShare}
+          className="bg-black/50 text-white text-base px-4 py-2 rounded-md transition-colors duration-300 hover:bg-black/70"
+        >
           <FaShareAlt />
-        </button>
+        </motion.button>
       </div>
-      <div className="product-tag">#AmazingReel id: {id}</div>
+      <div className="absolute top-10 left-5 bg-black/70 text-white px-4 py-2 text-base rounded-md opacity-0 transform -translate-y-5 animate-fade-in">
+        #AmazingReel id: {id}
+      </div>
     </div>
   );
 };
@@ -129,13 +191,12 @@ const Reels = () => {
   };
 
   return (
-    <div className="reels-container">
+    <div className="relative w-full min-h-screen overflow-y-auto p-0 m-0">
       {reelsData.slice(0, loadedVideos).map((reel, index) => (
-        <div key={reel.id} className="reel-wrapper">
+        <div key={reel.id} className="relative">
           <Reel
             src={reel.src}
             isPlaying={currentReelIndex === index}
-            onVideoLoad={() => {}}
             isMuted={isMuted}
             toggleMute={toggleMute}
             onLike={() => handleLike(reel.id)}
@@ -146,7 +207,11 @@ const Reels = () => {
         </div>
       ))}
 
-      {loading && <div className="loading">Loading more reels...</div>}
+      {loading && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold text-white z-50 flex justify-center items-center">
+          Loading more reels...
+        </div>
+      )}
     </div>
   );
 };
