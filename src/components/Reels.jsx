@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Reels.css";
 
+// Video reel component
 const reelsData = [
   {
     id: 1,
@@ -123,8 +124,7 @@ const reelsData = [
     src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
   },
 ];
-
-const Reel = ({ src, isPlaying, onVideoInView, isLoading }) => {
+const Reel = ({ src, isPlaying, onVideoInView, toggleMute }) => {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -140,22 +140,16 @@ const Reel = ({ src, isPlaying, onVideoInView, isLoading }) => {
 
   return (
     <div className="reel">
-      {isLoading ? (
-        <div className="loading-overlay">
-          <span>Loading...</span>
-        </div>
-      ) : (
-        <video
-          ref={videoRef}
-          src={src}
-          className="reel-video"
-          loop
-          muted={isMuted}
-          playsInline
-          onClick={() => setIsMuted(!isMuted)}
-          onLoadedData={onVideoInView}
-        />
-      )}
+      <video
+        ref={videoRef}
+        src={src}
+        className="reel-video"
+        loop
+        muted={isMuted}
+        playsInline
+        onClick={() => setIsMuted(!isMuted)}
+        onLoadedData={onVideoInView}
+      />
       <div className="reel-controls">
         <button onClick={() => setIsMuted(!isMuted)}>
           {isMuted ? "Unmute" : "Mute"}
@@ -167,14 +161,25 @@ const Reel = ({ src, isPlaying, onVideoInView, isLoading }) => {
 
 const Reels = () => {
   const [currentReelIndex, setCurrentReelIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [loading, setLoading] = useState(false); // Fix loading state
-  const [loadedVideos, setLoadedVideos] = useState(2);
+  const [loading, setLoading] = useState(false); // For loading state
+  const [loadedVideos, setLoadedVideos] = useState(2); // Start by loading the first two videos
+  const [isPlaying, setIsPlaying] = useState(true); // Declare the isPlaying state
 
-  // Handle scroll event to load more videos
-  const handleScroll = () => {
+  // Throttle the scroll event to avoid excessive calls
+  const throttleScroll = (callback, delay) => {
+    let lastCall = 0;
+    return () => {
+      const now = new Date().getTime();
+      if (now - lastCall >= delay) {
+        lastCall = now;
+        callback();
+      }
+    };
+  };
+
+  const handleScroll = throttleScroll(() => {
     const scrollPosition = window.scrollY + window.innerHeight;
-    const reelHeight = window.innerHeight;
+    const reelHeight = window.innerHeight; // Each reel takes up the full viewport height
     const nextReelIndex = Math.floor(scrollPosition / reelHeight);
 
     if (nextReelIndex !== currentReelIndex) {
@@ -187,14 +192,14 @@ const Reels = () => {
     ) {
       loadNextVideos();
     }
-  };
+  }, 200); // Limit scroll event calls to every 200ms
 
   const loadNextVideos = () => {
     if (loadedVideos < reelsData.length) {
       setLoading(true);
       setTimeout(() => {
         setLoadedVideos((prev) => prev + 2); // Load next 2 videos
-        setLoading(false); // Set loading to false after videos are loaded
+        setLoading(false);
       }, 1000); // Simulate delay for loading more videos
     }
   };
@@ -206,6 +211,7 @@ const Reels = () => {
     };
   }, [currentReelIndex]);
 
+  // Handle when video enters the viewport (IntersectionObserver)
   const handleVideoInView = () => {
     setIsPlaying(true);
   };
@@ -219,9 +225,9 @@ const Reels = () => {
         >
           <Reel
             src={reel.src}
-            isPlaying={currentReelIndex === index}
+            isPlaying={currentReelIndex === index && isPlaying}
             onVideoInView={handleVideoInView}
-            isLoading={loading}
+            toggleMute={() => setIsPlaying(!isPlaying)} // Add toggle mute functionality if needed
           />
         </div>
       ))}
