@@ -1,9 +1,8 @@
-/* Main container that allows scrolling */
 .reels-container {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* Ensure at least the height of the viewport */
-  overflow-y: auto; /* Allow vertical scrolling */
+  min-height: 100vh; 
+  overflow-y: auto;
   padding: 0;
   margin: 0;
 }
@@ -12,24 +11,24 @@
 .reel {
   position: relative;
   width: 100%;
-  height: 100vh; /* Ensure each reel takes up the entire viewport height */
+  height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;
   background: black;
-  border: 5px solid #fff; /* Optional: Add a white border around the video box */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow for visual effect */
-  padding: 10px; /* Add some padding to create spacing around the video */
-  box-sizing: border-box; /* Ensure padding is included in the element's size */
+  border: 5px solid #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); 
+  padding: 10px;
+  box-sizing: border-box; 
 }
 
 /* Video inside the border frame */
 .reel-video {
-  width: 100%; /* Make the video take the full width of the container */
-  height: 100%; /* Make the video take the full height of the container */
-  object-fit: contain; /* Make sure the video fits within the container without cropping */
+  width: 100%;
+  height: 100%; 
+  object-fit: contain;
   cursor: pointer;
-  border-radius: 8px; /* Optional: Add rounded corners to the video */
+  border-radius: 8px;
   transition: opacity 0.3s ease;
 }
 
@@ -37,7 +36,6 @@
   outline: none;
 }
 
-/* Controls for the reel (mute/unmute button) */
 .reel-controls {
   position: absolute;
   bottom: 20px;
@@ -63,23 +61,21 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Style for the loading state */
 .loading {
-  position: fixed; /* Use fixed positioning to keep it in place while scrolling */
-  top: 50%; /* Position at the vertical center */
-  left: 50%; /* Position at the horizontal center */
-  transform: translate(-50%, -50%); /* Adjust to perfectly center */
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
   font-size: 20px;
   color: #fff;
   font-weight: bold;
-  z-index: 999; /* Ensure it stays on top of other elements */
+  z-index: 999; 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 
-/* Ensure each video is shown one after another in the viewport */
 .reel-container {
   display: flex;
   flex-direction: column;
