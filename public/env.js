@@ -51,7 +51,7 @@ window.env = {
   "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
   "OS": "Windows_NT",
   "Path": "C:\\Users\\risha\\OneDrive\\Desktop\\instagram\\node_modules\\.bin;C:\\Users\\risha\\OneDrive\\Desktop\\node_modules\\.bin;C:\\Users\\risha\\OneDrive\\node_modules\\.bin;C:\\Users\\risha\\node_modules\\.bin;C:\\Users\\node_modules\\.bin;C:\\node_modules\\.bin;C:\\Users\\risha\\AppData\\Roaming\\npm\\node_modules\\npm\\node_modules\\@npmcli\\run-script\\lib\\node-gyp-bin;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PuTTY\\;C:\\Python312\\Scripts;C:\\Users\\risha\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\;C:\\Users\\risha\\AppData\\Local\\Programs\\Python\\Python313\\;C:\\Users\\risha\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\risha\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\risha\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe;C:\\Users\\risha\\AppData\\Roaming\\npm;C:\\Python312\\Scripts;C:\\Users\\risha\\AppData\\Local\\Programs\\Python\\Python39\\;",
-  "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC;.PY;.PYW;.CPL",
+  "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW;.CPL",
   "PROCESSOR_ARCHITECTURE": "AMD64",
   "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
   "PROCESSOR_LEVEL": "6",

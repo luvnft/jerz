@@ -1,4 +1,4 @@
-const reelsData = [
+const videolinks = [
   {
     id: 1,
     src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -120,3 +120,5 @@ const reelsData = [
     src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
   },
 ];
+
+export default videolinks;
