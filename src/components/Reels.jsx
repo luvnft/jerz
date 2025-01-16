@@ -1,9 +1,13 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import throttle from "lodash/throttle";
 import videolinks from "./videolinks";
-import { FaShareAlt } from "react-icons/fa";
+import {
+  FaShareAlt,
+  FaThumbsUp,
+  FaVolumeUp,
+  FaVolumeMute,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
-import { FaThumbsUp, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
 const Reel = ({
   src,
@@ -22,31 +26,43 @@ const Reel = ({
   useEffect(() => {
     const video = videoRef.current;
 
-    if (video) {
+    const playVideo = () => {
       if (isPlaying) {
         video
           .play()
           .catch((err) => console.error("Playback error:", err.message || err));
       } else {
-        const pauseTimeout = setTimeout(() => {
-          video.pause();
-        }, 100);
-
-        return () => clearTimeout(pauseTimeout);
+        video.pause();
       }
-    }
+    };
+
+    const handleScroll = () => {
+      if (video && isPlaying) {
+        video.play().catch((err) => {
+          console.error("Playback error:", err.message || err);
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    playVideo();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [isPlaying]);
 
   const handleLikeClick = () => {
     onLike();
     setAnimateThumb(true);
-    setTimeout(() => setAnimateThumb(false), 2000);
+    setTimeout(() => setAnimateThumb(false), 1000);
   };
 
   const handleMuteClick = () => {
     toggleMute();
     setAnimateSpeaker(true);
-    setTimeout(() => setAnimateSpeaker(false), 2000);
+    setTimeout(() => setAnimateSpeaker(false), 1000);
   };
 
   return (
@@ -58,7 +74,7 @@ const Reel = ({
         loop
         muted={isMuted}
         playsInline
-        onClick={toggleMute}
+        onClick={handleMuteClick}
       />
 
       {animateThumb && (
@@ -68,7 +84,7 @@ const Reel = ({
           initial={{ scale: 1, opacity: 0 }}
           transition={{ duration: 2 }}
         >
-          <FaThumbsUp className="text-white text-6xl" />
+          <FaThumbsUp className="text-sky-500 text-6xl" />
         </motion.div>
       )}
 
@@ -80,9 +96,9 @@ const Reel = ({
           transition={{ duration: 2 }}
         >
           {isMuted ? (
-            <FaVolumeMute className="text-white text-6xl" />
+            <FaVolumeMute className="text-sky-500 text-6xl" />
           ) : (
-            <FaVolumeUp className="text-white text-6xl" />
+            <FaVolumeUp className="text-sky-500 text-6xl" />
           )}
         </motion.div>
       )}
@@ -113,9 +129,15 @@ const Reel = ({
           <FaShareAlt />
         </motion.button>
       </div>
-      <div className="absolute top-10 left-5 bg-black/70 text-white px-4 py-2 text-base rounded-md opacity-0 transform -translate-y-5 animate-fade-in">
+
+      <motion.div
+        className="absolute top-10 left-5 bg-black/70 text-white px-4 py-2 text-base rounded-md"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
         #AmazingReel id: {id}
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -133,32 +155,37 @@ const Reels = () => {
   }, []);
 
   const loadMoreVideos = useCallback(() => {
-    if (loadedVideos < reelsData.length) {
-      setLoading(true);
-      setTimeout(() => {
-        setLoadedVideos((prev) => Math.min(prev + 2, reelsData.length));
-        setLoading(false);
-      }, 1000);
+    if (loading || loadedVideos >= reelsData.length) {
+      return;
     }
-  }, [loadedVideos, reelsData.length]);
+
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoadedVideos((prev) => Math.min(prev + 3, reelsData.length));
+      setLoading(false);
+    }, 1000);
+  }, [loading, loadedVideos, reelsData.length]);
 
   const handleScroll = throttle(() => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    const { innerHeight } = window;
+
     const nextReelIndex = Math.floor(
-      (scrollTop + clientHeight / 2) / clientHeight
+      (scrollTop + innerHeight / 2) / innerHeight
     );
 
     if (nextReelIndex !== currentReelIndex) {
       setCurrentReelIndex(nextReelIndex);
     }
 
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
+    if (scrollTop + innerHeight >= scrollHeight - 10) {
       loadMoreVideos();
     }
   }, 200);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -209,6 +236,9 @@ const Reels = () => {
 
       {loading && (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold text-white z-50 flex justify-center items-center">
+          <div className="spinner-border animate-spin text-white" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
           Loading more reels...
         </div>
       )}
