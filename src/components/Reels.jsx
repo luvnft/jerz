@@ -18,6 +18,7 @@ const Reel = ({
   onShare,
   isLiked,
   id,
+  tags,
 }) => {
   const videoRef = useRef(null);
   const [animateThumb, setAnimateThumb] = useState(false);
@@ -138,6 +139,16 @@ const Reel = ({
       >
         #AmazingReel id: {id}
       </motion.div>
+      <div className="absolute bottom-20 left-0 w-full bg-black/70 text-white px-4 py-2 text-sm rounded-md flex justify-center gap-2 flex-wrap">
+        {tags.map((tag, index) => (
+          <span
+            key={index}
+            className="text-blue-400 hover:text-blue-500 hover:underline cursor-pointer transition duration-200"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
@@ -230,6 +241,7 @@ const Reels = () => {
             onShare={() => handleShare(reel.id)}
             isLiked={likedVideos[reel.id]}
             id={reel.id}
+            tags={reel.tags}
           />
         </div>
       ))}
