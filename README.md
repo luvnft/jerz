@@ -1,33 +1,64 @@
-# Instagram-reel
-demo app link: https://insta-reels-one.vercel.app/
+# Insta Reels - Infinite Scroll Feature
 
+![Insta Reels](https://insta-reels-one.vercel.app/favicon.ico)
 
-## Available Scripts
+A React-based Instagram Reels clone with an infinite scroll feature, allowing users to continuously watch short videos seamlessly.
 
-In the project directory, you can run:
+## 🔗 Live Demo
+[Insta Reels - Live](https://insta-reels-one.vercel.app/)
 
-### `npm start`
+## 📸 Screenshots
+![Preview](https://via.placeholder.com/800x400.png?text=App+Screenshot)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📂 Project Structure
+This project is built using **React** and **Tailwind CSS**, with **React Intersection Observer** to implement infinite scrolling.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🚀 Features
+✅ Infinite scroll for video reels  
+✅ Auto-play when a reel comes into view  
+✅ Pause when scrolling away  
+✅ Responsive UI with Tailwind CSS  
 
-### `npm test`
+## 🛠 Tech Stack
+- React.js  
+- Tailwind CSS  
+- React Intersection Observer  
+- Vercel (for deployment)  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔧 Installation
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/rishabrajverma44/insta-reels.git
+   cd insta-reels
+   ```
+2. Install dependencies:  
+   ```bash
+   yarn install
+   ```
+3. Start the development server:  
+   ```bash
+   yarn start
+   ```
+4. Open `http://localhost:3000` in your browser.
 
-### `npm run build`
+## 📌 Usage
+- Scroll down to load more reels dynamically.  
+- Reels autoplay when they enter the viewport.  
+- Pause when scrolling past a video.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🎯 Deployment
+This project is deployed on Vercel. To deploy your own instance:  
+```bash
+vercel
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🤝 Contributing
+Feel free to fork the repo and submit a pull request with improvements!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📜 License
+This project is licensed under the MIT License.
 
+## 📬 Contact
+For support or inquiries, contact [rishabrajverma44](https://github.com/rishabrajverma44).
 
-
+---
