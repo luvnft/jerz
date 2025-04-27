@@ -2,20 +2,25 @@ const videolinks = [
   {
     id: 1,
     src: "https://gateway.pinata.cloud/ipfs/bafybeib7evphrjx42ehg3yv4tycwmpgklrkobnsd4xqua7hx4ijzbl5uwm",
-    address: "Downtown, Main Street",
-    what3wordsAddress: "apple.banana.cherry",
-    cryptoAddress: "0xAbCdEf1234567890",
+    address: "9402 Ventnor Avenue, Margate City, NJ 08402",
+    what3wordsAddress: "///drew.axed.shelf",
+    cryptoAddress: "0xAb...",
     tags: ["Commercial", "For Sale", "Prime Location"],
-    description: `🏢 Prime Commercial Space in Downtown
-📍 What3Words Address: apple.banana.cherry
+    description: `🏢 Prime Restaurant Commercial Space
+📍 What3Words Address: ///drew.axed.shelf
 💰 Accepting Crypto Payments
 👍 Accepts Bitcoin $RNT
-🔑 Wallet Address: 0xAbCdEf1234567890
+🔑 Wallet Address: 0xAbC...
 🚇 Steps from subway station
 🅿️ Ample parking available
-📏 5,000 sq ft available`,
-    externalLink: "https://commercial-real-estate.example.com/listings/1",
-    price: "₿ 2.5 (≈ $100,000)"
+📏 2,800 sq ft available`,
+    externalLink: "https://www.bergerrealty.com/sale/593639.html?agent=tfb&limit=21&type=condo",
+    price: {
+      btc: 13.8,
+      sats: 1,380,000,000,
+      usd: 1,299,000,
+      display: "₿13.8 (1,380,000,000 sats ≈ $1,299,000)"
+    }
   },
   {
     id: 2,
@@ -32,7 +37,12 @@ const videolinks = [
 🌱 Energy-efficient building
 ✨ Newly Available for Lease!`,
     externalLink: "https://retail-spaces.example.com/properties/2",
-    price: "Ξ 1.2/month (≈ $4,000)"
+    price: {
+      btc: 0.08,
+      sats: 8000000,
+      usd: 4000,
+      display: "₿0.08 (8,000,000 sats ≈ $4,000/month)"
+    }
   },
   {
     id: 3,
@@ -50,7 +60,12 @@ const videolinks = [
 🏊 Rooftop infinity pool
 🌇 Panoramic city views`,
     externalLink: "https://luxury-properties.example.com/listings/3",
-    price: "₿ 8.75 (≈ $350,000)"
+    price: {
+      btc: 8.75,
+      sats: 875000000,
+      usd: 350000,
+      display: "₿8.75 (875,000,000 sats ≈ $350,000)"
+    }
   },
   {
     id: 4,
@@ -68,7 +83,12 @@ const videolinks = [
 ☕ On-site cafe & amenities
 🔄 Month-to-month leases`,
     externalLink: "https://tech-offices.example.com/spaces/4",
-    price: "Ξ 0.5/month (≈ $1,600)"
+    price: {
+      btc: 0.04,
+      sats: 4000000,
+      usd: 1600,
+      display: "₿0.04 (4,000,000 sats ≈ $1,600/month)"
+    }
   },
   {
     id: 5,
@@ -86,7 +106,12 @@ const videolinks = [
 ⚡ Fully renovated interiors
 📜 Landmark designation`,
     externalLink: "https://historic-properties.example.com/listings/5",
-    price: "₿ 15 (≈ $600,000)"
+    price: {
+      btc: 15,
+      sats: 1500000000,
+      usd: 600000,
+      display: "₿15 (1,500,000,000 sats ≈ $600,000)"
+    }
   }
 ];
 
