@@ -93,29 +93,6 @@ const videolinks = [
   },
   {
   id: 5,
-  src: "https://gateway.pinata.cloud/bafybeiaflmuvctrgiqtuxmlme63fm675wxbf7dpsn54t7gsehvafbv5jc4",
-  address: "2315-2319 North Broad Street, Philadelphia, PA 19132", 
-  what3wordsAddress: "///seated.prone.overnight",
-  cryptoAddress: "0xTechPark789",
-  tags: ["Office", "Co-Working", "Flexible"],
-  description: `💻 5 Story building 12,789 SF SF on .33 acres
-📍 What3Words Address: ///seated.prone.overnight
-🪙 Pay with ETH or stablecoins
-👍 Accepts Bitcoin $RNT
-🔑 Wallet: 0xTechPark789
-🚀 Ideal for startups
-☕ On-site cafe & amenities
-🔄 Month-to-month leases`,
-  externalLink: "https://wolfcre.com/listing/2315-n-broad-street-philadelphia-pa/",
-  price: {
-    btc: 0.04,
-    sats: 4000000,
-    usd: 1600,
-    display: "₿0.04 (4,000,000 sats ≈ $1,600/month)"
-    }
-  },
-  {
-    id: 6,
     src: "https://gateway.pinata.cloud/ipfs/bafybeiclyfsjebhtej5x2kywr2er2v2xrdwzb2gvktlqpoamcag4mkcala",
     address: "9-11 Black Horse Pike, Blackwood, NJ",
     what3wordsAddress: "///disown.bandstand.detection",
