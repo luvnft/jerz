@@ -11,7 +11,6 @@ import { motion } from "framer-motion";
 
 const Reel = ({
   src,
-  isPlaying,
   isMuted,
   toggleMute,
   onLike,
@@ -23,36 +22,6 @@ const Reel = ({
   const videoRef = useRef(null);
   const [animateThumb, setAnimateThumb] = useState(false);
   const [animateSpeaker, setAnimateSpeaker] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-
-    const playVideo = () => {
-      if (isPlaying) {
-        video
-          .play()
-          .catch((err) => console.error("Playback error:", err.message || err));
-      } else {
-        video.pause();
-      }
-    };
-
-    const handleScroll = () => {
-      if (video && isPlaying) {
-        video.play().catch((err) => {
-          console.error("Playback error:", err.message || err);
-        });
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    playVideo();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isPlaying]);
 
   const handleLikeClick = () => {
     onLike();
@@ -67,17 +36,19 @@ const Reel = ({
   };
 
   return (
-    <div className="relative w-full h-screen flex justify-center items-center bg-black border-4 border-white shadow-lg p-4 box-border">
+    <div className="relative group w-full h-[300px] flex justify-center items-center bg-black border-4 border-white shadow-lg rounded-lg overflow-hidden">
       <video
         ref={videoRef}
         src={src}
-        className="w-full h-full object-contain cursor-pointer rounded-lg transition-opacity duration-300 ease-in-out"
+        className="w-full h-full object-cover cursor-pointer transition-opacity duration-300 group-hover:opacity-90"
         loop
         muted={isMuted}
         playsInline
+        autoPlay
         onClick={handleMuteClick}
       />
 
+      {/* Optional Like animation */}
       {animateThumb && (
         <motion.div
           className="absolute z-20"
@@ -89,6 +60,7 @@ const Reel = ({
         </motion.div>
       )}
 
+      {/* Optional Speaker animation */}
       {animateSpeaker && (
         <motion.div
           className="absolute z-20"
@@ -104,48 +76,40 @@ const Reel = ({
         </motion.div>
       )}
 
-      <div className="absolute bottom-5 left-5 z-10 flex justify-center items-center gap-2">
-        <motion.button
+      {/* Buttons appear on hover */}
+      <div className="absolute bottom-2 left-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <button
           onClick={handleMuteClick}
-          className="bg-black/50 text-white text-base px-4 py-2 rounded-md transition-colors duration-300 hover:bg-black/70"
+          className="bg-black/60 text-white text-sm px-3 py-1 rounded"
         >
-          {isMuted ? "Unmute" : "Mute"}
-        </motion.button>
+          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+        </button>
 
-        <motion.button
+        <button
           onClick={handleLikeClick}
-          className={`text-base px-4 py-2 rounded-md transition-colors duration-300 ${
-            isLiked
-              ? "bg-blue-500 text-white"
-              : "bg-black/50 text-white hover:bg-black/70"
+          className={`text-sm px-3 py-1 rounded ${
+            isLiked ? "bg-blue-500 text-white" : "bg-black/60 text-white"
           }`}
         >
           <FaThumbsUp />
-        </motion.button>
+        </button>
 
-        <motion.button
+        <button
           onClick={onShare}
-          className="bg-black/50 text-white text-base px-4 py-2 rounded-md transition-colors duration-300 hover:bg-black/70"
+          className="bg-black/60 text-white text-sm px-3 py-1 rounded"
         >
           <FaShareAlt />
-        </motion.button>
+        </button>
       </div>
 
-      <motion.div
-        className="absolute top-10 left-5 bg-black/70 text-white px-4 py-2 text-base rounded-md"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        #AmazingReel id: {id}
-      </motion.div>
-      <div className="absolute bottom-20 left-0 w-full bg-black/70 text-white px-4 py-2 text-sm rounded-md flex justify-center gap-2 flex-wrap">
+      {/* Optional: Tags at bottom */}
+      <div className="absolute bottom-2 right-2 flex flex-wrap gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="text-blue-400 hover:text-blue-500 hover:underline cursor-pointer transition duration-200"
+            className="text-xs bg-black/50 text-blue-400 px-2 py-1 rounded"
           >
-            {tag}
+            #{tag}
           </span>
         ))}
       </div>
@@ -155,8 +119,7 @@ const Reel = ({
 
 const Reels = () => {
   const [reelsData, setReelsData] = useState([]);
-  const [currentReelIndex, setCurrentReelIndex] = useState(0);
-  const [loadedVideos, setLoadedVideos] = useState(3);
+  const [loadedVideos, setLoadedVideos] = useState(6);
   const [loading, setLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [likedVideos, setLikedVideos] = useState({});
@@ -166,40 +129,24 @@ const Reels = () => {
   }, []);
 
   const loadMoreVideos = useCallback(() => {
-    if (loading || loadedVideos >= reelsData.length) {
-      return;
-    }
-
+    if (loading || loadedVideos >= reelsData.length) return;
     setLoading(true);
-
     setTimeout(() => {
-      setLoadedVideos((prev) => Math.min(prev + 3, reelsData.length));
+      setLoadedVideos((prev) => Math.min(prev + 6, reelsData.length));
       setLoading(false);
     }, 1000);
   }, [loading, loadedVideos, reelsData.length]);
 
   const handleScroll = throttle(() => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    const { innerHeight } = window;
-
-    const nextReelIndex = Math.floor(
-      (scrollTop + innerHeight / 2) / innerHeight
-    );
-
-    if (nextReelIndex !== currentReelIndex) {
-      setCurrentReelIndex(nextReelIndex);
-    }
-
-    if (scrollTop + innerHeight >= scrollHeight - 10) {
+    if (scrollTop + clientHeight >= scrollHeight - 10) {
       loadMoreVideos();
     }
   }, 200);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   const toggleMute = () => setIsMuted((prev) => !prev);
@@ -212,12 +159,12 @@ const Reels = () => {
   };
 
   const handleShare = (id) => {
-    const shareUrl = `https://insta-reels-one.vercel.app/video/`;
+    const shareUrl = `https://tv.creai.digital/video/${id}`;
     if (navigator.share) {
       navigator
         .share({
           title: "Check out this reel!",
-          text: "Check out this amazing video reel on Insta Reels!",
+          text: "Check out this amazing video reel!",
           url: shareUrl,
         })
         .catch((err) => console.error("Share failed", err));
@@ -229,12 +176,11 @@ const Reels = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-y-auto p-0 m-0">
-      {reelsData.slice(0, loadedVideos).map((reel, index) => (
-        <div key={reel.id} className="relative">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+      {reelsData.slice(0, loadedVideos).map((reel) => (
+        <div key={reel.id}>
           <Reel
             src={reel.src}
-            isPlaying={currentReelIndex === index}
             isMuted={isMuted}
             toggleMute={toggleMute}
             onLike={() => handleLike(reel.id)}
@@ -247,10 +193,7 @@ const Reels = () => {
       ))}
 
       {loading && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold text-white z-50 flex justify-center items-center">
-          <div className="spinner-border animate-spin text-white" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
+        <div className="col-span-full text-center text-white font-bold">
           Loading more reels...
         </div>
       )}
