@@ -51,6 +51,13 @@ const Reel = ({
     setShowDescription(!showDescription);
   };
 
+  // Safely handle price display (object or string)
+  const getPriceDisplay = () => {
+    if (typeof price === 'string') return price;
+    if (price && price.display) return price.display;
+    return "Price not available";
+  };
+
   return (
     <div className="relative h-screen w-full flex justify-center bg-black overflow-hidden">
       {/* Video */}
@@ -69,7 +76,7 @@ const Reel = ({
         {/* Property Info */}
         <div className="text-white mb-4">
           <h3 className="font-bold text-lg">{address}</h3>
-          <p className="text-sm opacity-90">{price}</p>
+          <p className="text-sm opacity-90">{getPriceDisplay()}</p>
           <p className="text-xs opacity-80 mt-1">📍 {what3wordsAddress}</p>
         </div>
         
@@ -163,7 +170,7 @@ const Reel = ({
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
                 <h3 className="font-bold">Price</h3>
-                <p>{price}</p>
+                <p>{getPriceDisplay()}</p>
               </div>
               <div>
                 <h3 className="font-bold">Location</h3>
@@ -199,7 +206,7 @@ const Reels = () => {
   };
 
   const handleShare = (id) => {
-    const shareUrl = `https://crypto-reels.example.com/video/${id}`;
+    const shareUrl = `https://tv.creai.digital/video/${id}`;
     if (navigator.share) {
       navigator.share({
         title: "Check out this property!",
