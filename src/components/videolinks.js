@@ -1,6 +1,30 @@
 const videolinks = [
   {
     id: 1,
+    src: "https://ipfs.io/ipfs/bafybeib7evphrjx42ehg3yv4tycwmpgklrkobnsd4xqua7hx4ijzbl5uwm",
+    fallbackSrc: "https://gateway.pinata.cloud/ipfs/bafybeib7evphrjx42ehg3yv4tycwmpgklrkobnsd4xqua7hx4ijzbl5uwm",
+    address: "9402 Ventnor Avenue, Margate City, NJ 08402",
+    what3wordsAddress: "///drew.axed.shelf",
+    cryptoAddress: "0xAb...",
+    tags: ["Commercial", "For Sale", "Prime Location"],
+    description: `🏢 Prime Restaurant Commercial Space
+📍 What3Words Address: ///drew.axed.shelf
+💰 Accepting Crypto Payments
+👍 Accepts Bitcoin $RNT
+🔑 Wallet Address: 0xAbC...
+🚇 Steps from subway station
+🅿️ Ample parking available
+📏 2,800 sq ft available`,
+    externalLink: "https://www.bergerrealty.com/sale/593639.html?agent=tfb&limit=21&type=condo",
+    price: {
+      btc: 138,
+      sats: 1380000000,
+      usd: 1299000,
+      display: "₿13.8 (1,380,000,000 sats ≈ $1,299,000)"
+    }
+  },
+  {
+    id: 1,
     src: "https://gateway.pinata.cloud/ipfs/bafybeib7evphrjx42ehg3yv4tycwmpgklrkobnsd4xqua7hx4ijzbl5uwm",
     address: "9402 Ventnor Avenue, Margate City, NJ 08402",
     what3wordsAddress: "///drew.axed.shelf",
