@@ -115,7 +115,7 @@ Philadelphia, PA 19132",
       display: "₿0.04 (4,000,000 sats ≈ $1,600/month)"
     }
   },
-  {
+    {
     id: 6,
     src: "https://gateway.pinata.cloud/ipfs/bafybeiclyfsjebhtej5x2kywr2er2v2xrdwzb2gvktlqpoamcag4mkcala",
     address: "9-11 Black Horse Pike, Blackwood, NJ",
