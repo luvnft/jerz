@@ -9,3 +9,32 @@ html {
 .snap-start {
   scroll-snap-align: start;
 }
+
+/* --- Add Video Wall Styles Below --- */
+
+.video-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #f9f9f9; /* Light background */
+}
+
+.video-item {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.video-item:hover {
+  transform: scale(1.02);
+}
+
+.video-item video,
+.video-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
