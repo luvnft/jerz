@@ -17,7 +17,7 @@ const videolinks = [
 📏 2,800 sq ft available`,
     externalLink: "https://www.bergerrealty.com/sale/593639.html?agent=tfb&limit=21&type=condo",
     price: {
-      btc: 138,
+      btc: 13,
       sats: 1380000000,
       usd: 1299000,
       display: "₿13.8 (1,380,000,000 sats ≈ $1,299,000)"
