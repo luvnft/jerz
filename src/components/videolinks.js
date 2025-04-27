@@ -1,395 +1,93 @@
 const videolinks = [
   {
     id: 1,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    tags: [
-      "#nature",
-      "#wildlife",
-      "#funny",
-      "#bunny",
-      "#animation",
-      "#movie",
-      "#family",
-    ],
+    src: "https://gateway.pinata.cloud/ipfs/QmVideo1",
+    address: "Downtown, Main Street",
+    what3wordsAddress: "apple.banana.cherry",
+    cryptoAddress: "0xAbCdEf1234567890",
+    tags: ["Commercial", "For Sale", "Prime Location"],
+    description: `🏢 Prime Commercial Space in Downtown
+📍 What3Words Address: apple.banana.cherry
+💰 Accepting Crypto Payments
+👍 Accepts Bitcoin $RNT
+🔑 Wallet Address: 0xAbCdEf1234567890
+🚇 Steps from subway station
+🅿️ Ample parking available
+📏 5,000 sq ft available`,
+    externalLink: "https://commercial-real-estate.example.com/listings/1",
+    price: "₿ 2.5 (≈ $100,000)"
   },
   {
     id: 2,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    tags: [
-      "#travel",
-      "#adventure",
-      "#escape",
-      "#outdoor",
-      "#freedom",
-      "#journey",
-      "#landscape",
-    ],
+    src: "https://gateway.pinata.cloud/ipfs/QmVideo2",
+    address: "Uptown, Park Avenue",
+    what3wordsAddress: "dog.house.tree",
+    cryptoAddress: "1X2y3Z4W5V6U7T8J9K0L",
+    tags: ["Retail", "Crypto", "For Rent"],
+    description: `🏬 Retail Space Available at Uptown, Park Avenue
+📍 What3Words Address: dog.house.tree
+💰 Pay with Bitcoin, 🪙 or any crypto!
+👍 Accepts Bitcoin $RNT
+🔑 Send payments to: 1X2y3Z4W5V6U7T8J9K0L
+🌱 Energy-efficient building
+✨ Newly Available for Lease!`,
+    externalLink: "https://retail-spaces.example.com/properties/2",
+    price: "Ξ 1.2/month (≈ $4,000)"
   },
   {
     id: 3,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    tags: [
-      "#fire",
-      "#blaze",
-      "#thrill",
-      "#action",
-      "#hero",
-      "#intense",
-      "#firefighter",
-    ],
+    src: "https://gateway.pinata.cloud/ipfs/QmVideo3",
+    address: "Waterfront District",
+    what3wordsAddress: "ocean.view.sunset",
+    cryptoAddress: "bnb1q2w3e4r5t6y7u8i9o0p",
+    tags: ["Luxury", "Penthouse", "Water View"],
+    description: `🌊 Luxury Penthouse with Ocean Views
+📍 What3Words Address: ocean.view.sunset
+💎 Accepts Binance Coin (BNB)
+👍 Accepts Bitcoin $RNT
+🔑 Wallet: bnb1q2w3e4r5t6y7u8i9o0p
+🛁 3 Bedrooms, 3.5 Baths
+🏊 Rooftop infinity pool
+🌇 Panoramic city views`,
+    externalLink: "https://luxury-properties.example.com/listings/3",
+    price: "₿ 8.75 (≈ $350,000)"
   },
   {
     id: 4,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    tags: [
-      "#meltdown",
-      "#comedy",
-      "#fun",
-      "#laughs",
-      "#relatable",
-      "#breakdown",
-      "#hilarious",
-    ],
+    src: "https://gateway.pinata.cloud/ipfs/QmVideo4",
+    address: "Tech Park, Innovation Drive",
+    what3wordsAddress: "laptop.code.startup",
+    cryptoAddress: "0xTechPark789",
+    tags: ["Office", "Co-Working", "Flexible"],
+    description: `💻 Tech Hub Office Space
+📍 What3Words Address: laptop.code.startup
+🪙 Pay with ETH or stablecoins
+👍 Accepts Bitcoin $RNT
+🔑 Wallet: 0xTechPark789
+🚀 Ideal for startups
+☕ On-site cafe & amenities
+🔄 Month-to-month leases`,
+    externalLink: "https://tech-offices.example.com/spaces/4",
+    price: "Ξ 0.5/month (≈ $1,600)"
   },
   {
     id: 5,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    tags: [
-      "#joyride",
-      "#rollercoaster",
-      "#excitement",
-      "#fun",
-      "#adventure",
-      "#thrill",
-      "#ride",
-    ],
-  },
-  {
-    id: 6,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    tags: [
-      "#animation",
-      "#bunny",
-      "#movie",
-      "#nature",
-      "#family",
-      "#wildlife",
-      "#kids",
-    ],
-  },
-  {
-    id: 7,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    tags: [
-      "#escape",
-      "#outdoor",
-      "#freedom",
-      "#adventure",
-      "#travel",
-      "#landscape",
-      "#journey",
-    ],
-  },
-  {
-    id: 8,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    tags: [
-      "#action",
-      "#firefighter",
-      "#hero",
-      "#fire",
-      "#thrill",
-      "#intense",
-      "#rescue",
-    ],
-  },
-  {
-    id: 9,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    tags: [
-      "#funny",
-      "#breakdown",
-      "#laughs",
-      "#comedy",
-      "#meltdown",
-      "#relatable",
-      "#hilarious",
-    ],
-  },
-  {
-    id: 10,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    tags: [
-      "#adventure",
-      "#ride",
-      "#fun",
-      "#thrill",
-      "#joyride",
-      "#rollercoaster",
-      "#excitement",
-    ],
-  },
-  // Repeating URLs with incremented IDs
-  {
-    id: 11,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#bunny",
-      "#nature",
-      "#wildlife",
-      "#family",
-      "#kids",
-    ],
-  },
-  {
-    id: 12,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#adventure",
-      "#freedom",
-      "#outdoor",
-      "#journey",
-      "#landscape",
-    ],
-  },
-  {
-    id: 13,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#fire",
-      "#intense",
-      "#action",
-      "#hero",
-      "#thrill",
-    ],
-  },
-  {
-    id: 14,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#comedy",
-      "#laughs",
-      "#relatable",
-      "#fun",
-      "#hilarious",
-    ],
-  },
-  {
-    id: 15,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#joyride",
-      "#excitement",
-      "#thrill",
-      "#adventure",
-      "#ride",
-    ],
-  },
-  {
-    id: 16,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#bunny",
-      "#nature",
-      "#animation",
-      "#movie",
-      "#kids",
-    ],
-  },
-  {
-    id: 17,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#freedom",
-      "#journey",
-      "#adventure",
-      "#landscape",
-      "#escape",
-    ],
-  },
-  {
-    id: 18,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#fire",
-      "#rescue",
-      "#hero",
-      "#action",
-      "#thrill",
-    ],
-  },
-  {
-    id: 19,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#comedy",
-      "#fun",
-      "#hilarious",
-      "#relatable",
-      "#meltdown",
-    ],
-  },
-  {
-    id: 20,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    tags: [
-      "#default",
-      "#video",
-      "#joyride",
-      "#thrill",
-      "#ride",
-      "#excitement",
-      "#adventure",
-    ],
-  },
-  {
-    id: 21,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    tags: [
-      "#animation",
-      "#funny",
-      "#bunny",
-      "#movie",
-      "#family",
-      "#kids",
-      "#wildlife",
-    ],
-  },
-  {
-    id: 22,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    tags: [
-      "#travel",
-      "#adventure",
-      "#freedom",
-      "#outdoor",
-      "#landscape",
-      "#journey",
-      "#escape",
-    ],
-  },
-  {
-    id: 23,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    tags: [
-      "#fire",
-      "#thrill",
-      "#hero",
-      "#rescue",
-      "#action",
-      "#firefighter",
-      "#intense",
-    ],
-  },
-  {
-    id: 24,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    tags: [
-      "#comedy",
-      "#funny",
-      "#hilarious",
-      "#laughs",
-      "#relatable",
-      "#breakdown",
-      "#fun",
-    ],
-  },
-  {
-    id: 25,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    tags: [
-      "#joyride",
-      "#thrill",
-      "#adventure",
-      "#rollercoaster",
-      "#ride",
-      "#fun",
-      "#excitement",
-    ],
-  },
-  {
-    id: 26,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    tags: [
-      "#bunny",
-      "#animation",
-      "#family",
-      "#nature",
-      "#kids",
-      "#movie",
-      "#wildlife",
-    ],
-  },
-  {
-    id: 27,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    tags: [
-      "#adventure",
-      "#journey",
-      "#landscape",
-      "#travel",
-      "#freedom",
-      "#outdoor",
-      "#escape",
-    ],
-  },
-  {
-    id: 28,
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    tags: [
-      "#firefighter",
-      "#action",
-      "#hero",
-      "#rescue",
-      "#thrill",
-      "#fire",
-      "#intense",
-    ],
-  },
-  {
-    id: 29,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    tags: [
-      "#relatable",
-      "#comedy",
-      "#funny",
-      "#laughs",
-      "#breakdown",
-      "#fun",
-      "#hilarious",
-    ],
-  },
-  {
-    id: 30,
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    tags: [
-      "#thrill",
-      "#ride",
-      "#joyride",
-      "#adventure",
-      "#excitement",
-      "#fun",
-      "#rollercoaster",
-    ],
-  },
+    src: "https://gateway.pinata.cloud/ipfs/QmVideo5",
+    address: "Historic District",
+    what3wordsAddress: "brick.cobblestone.lamp",
+    cryptoAddress: "DAGHistoricPropertyXYZ",
+    tags: ["Renovated", "Character", "Mixed-Use"],
+    description: `🏛️ Historic Building - Mixed Use
+📍 What3Words Address: brick.cobblestone.lamp
+💰 Accepts 20+ cryptocurrencies
+👍 Accepts Bitcoin $RNT
+🔑 Wallet: DAGHistoricPropertyXYZ
+🔄 Ground floor retail + upstairs offices
+⚡ Fully renovated interiors
+📜 Landmark designation`,
+    externalLink: "https://historic-properties.example.com/listings/5",
+    price: "₿ 15 (≈ $600,000)"
+  }
 ];
 
 export default videolinks;
